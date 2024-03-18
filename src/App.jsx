@@ -1,9 +1,29 @@
 import { useState } from "react";
 import Joke from "./components/Joke";
+import Counter from "./components/Counter";
+import Sum from "./components/Sum";
 
 function App() {
   const [jokesArray, setJokesArray] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [count, setCount] = useState(0);
+  const [operandOne, setOperandOne] = useState("");
+  const [operandTwo, setOperandTwo] = useState("");
+  const [result, setResult] = useState();
+
+  function handleSum() {
+    const sum = parseInt(operandOne) + parseInt(operandTwo);
+    setResult(sum);
+  }
+
+  function increament() {
+    setCount(count + 1);
+  }
+
+  function decreament() {
+    setCount(count - 1);
+  }
+
   const jokes = [
     {
       id: 1,
@@ -99,6 +119,20 @@ function App() {
           <Joke key={joke.id} joke={joke} />
         ))}
       </div>
+      <Counter
+        count={count}
+        increament={increament}
+        decreament={decreament}
+      ></Counter>
+      <Sum
+        text="Enter operands to add."
+        operandOne={operandOne}
+        operandTwo={operandTwo}
+        setOperandOne={setOperandOne}
+        setOperandTwo={setOperandTwo}
+        handleSum={handleSum}
+        sum={result}
+      />
     </>
   );
 }
