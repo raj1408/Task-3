@@ -10,6 +10,7 @@ function App() {
   const [operandOne, setOperandOne] = useState("");
   const [operandTwo, setOperandTwo] = useState("");
   const [result, setResult] = useState();
+  const [buttonEnabled, setButtonEnabled] = useState(false);
 
   function handleSum() {
     const sum = parseInt(operandOne) + parseInt(operandTwo);
@@ -100,6 +101,18 @@ function App() {
     }
   }
 
+  function enableButton() {
+    setButtonEnabled(true);
+  }
+
+  function disableButton() {
+    setButtonEnabled(false);
+  }
+
+  function toggleButton() {
+    setButtonEnabled((prev) => !prev);
+  }
+
   return (
     <>
       <div className="main">
@@ -132,6 +145,9 @@ function App() {
         setOperandTwo={setOperandTwo}
         handleSum={handleSum}
         sum={result}
+        buttonText={buttonEnabled ? "Disable" : "Enable"}
+        toggleButton={toggleButton}
+        buttonEnabled={buttonEnabled}
       />
     </>
   );
